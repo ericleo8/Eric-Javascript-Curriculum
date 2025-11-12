@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Manipulasi Tabel dari API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f1f1;
+    }
+
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    tr.mahal {
+      background: #ffecec;
+      color: #c30000;
+    }
+
+    #info {
+      text-align: center;
+      margin-top: 10px;
+      color: #555;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛍️ Daftar Produk – Manipulasi Data API</h2>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="🔍 Cari produk...">
+    <select id="filterKategori">
+      <option value="all">Semua Kategori</option>
+      <option value="Elektronik">Elektronik</option>
+      <option value="Aksesoris">Aksesoris</option>
+      <option value="Lainnya">Lainnya</option>
+    </select>
+    <button id="sortHarga">Urutkan Harga ↑↓</button>
+  </div>
+
+  <table id="produkTable">
+    <thead>
+      <tr><th>Nama</th><th>Kategori</th><th>Harga</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="info"></div>
+
+  <script>
+    const tableBody = document.querySelector("#produkTable tbody");
+    const info = document.getElementById("info");
+    const searchInput = document.getElementById("search");
+    const filterSelect = document.getElementById("filterKategori");
+    const sortBtn = document.getElementById("sortHarga");
+
+    let dataProduk = [];
+    let sortAscending = true;
+
+    async function loadData() {
+      const res = await fetch("produk.json");
+      const data = await res.json();
+      dataProduk = data;
+      renderTable(dataProduk);
+    }
+
+    function renderTable(data) {
+      tableBody.innerHTML = "";
+      let total = 0;
+
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        if (item.harga > 1000000) tr.classList.add("mahal");
+
+        tr.innerHTML = `
+          <td>${item.nama}</td>
+          <td>${item.kategori}</td>
+          <td>Rp${item.harga.toLocaleString()}</td>
+        `;
+
+        tableBody.appendChild(tr);
+        total += item.harga;
+      });
+
+      info.textContent = `Total Produk: ${data.length} | Total Harga: Rp${total.toLocaleString()}`;
+    }
+
+    // Search Produk
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.toLowerCase();
+      const hasil = dataProduk.filter(p => p.nama.toLowerCase().includes(keyword));
+      renderTable(hasil);
+    });
+
+    // Filter Kategori
+    filterSelect.addEventListener("change", () => {
+      const kategori = filterSelect.value;
+      if (kategori === "all") {
+        renderTable(dataProduk);
+      } else {
+        const hasil = dataProduk.filter(p => p.kategori === kategori);
+        renderTable(hasil);
+      }
+    });
+
+    // Sort Harga
+    sortBtn.addEventListener("click", () => {
+      const sorted = [...dataProduk].sort((a, b) => sortAscending ? a.harga - b.harga : b.harga - a.harga);
+      renderTable(sorted);
+      sortAscending = !sortAscending;
+    });
+
+    loadData();
+  </script>
+
+</body>
+</html>
