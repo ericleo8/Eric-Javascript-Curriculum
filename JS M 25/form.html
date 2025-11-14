@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 Form Registrasi</h2>
+
+  <form id="registerForm">
+    <label>Nama Lengkap</label>
+    <input type="text" id="nama" placeholder="Masukkan nama">
+    <div class="error" id="errorNama"></div>
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Masukkan email">
+    <div class="error" id="errorEmail"></div>
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Minimal 8 karakter">
+    <div class="error" id="errorPassword"></div>
+
+    <label>Nomor HP</label>
+    <input type="text" id="telepon" placeholder="Contoh: 08123456789">
+    <div class="error" id="errorTelepon"></div>
+
+    <button type="submit">Daftar</button>
+  </form>
+
+  <div class="success" id="successMsg"></div>
+
+  <script>
+    const form = document.getElementById("registerForm");
+    const nama = document.getElementById("nama");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const telepon = document.getElementById("telepon");
+
+    const errorNama = document.getElementById("errorNama");
+    const errorEmail = document.getElementById("errorEmail");
+    const errorPassword = document.getElementById("errorPassword");
+    const errorTelepon = document.getElementById("errorTelepon");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // mencegah reload
+      let isValid = true;
+      successMsg.textContent = "";
+
+      // Validasi Nama
+      if (nama.value.trim() === "") {
+        errorNama.textContent = "Nama tidak boleh kosong";
+        isValid = false;
+      } else {
+        errorNama.textContent = "";
+      }
+
+      // Validasi Email
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.value.match(emailPattern)) {
+        errorEmail.textContent = "Email tidak valid";
+        isValid = false;
+      } else {
+        errorEmail.textContent = "";
+      }
+
+      // Validasi Password
+      if (password.value.length < 8) {
+        errorPassword.textContent = "Password minimal 8 karakter";
+        isValid = false;
+      } else {
+        errorPassword.textContent = "";
+      }
+
+      // Validasi Telepon
+      const phonePattern = /^[0-9]{10,13}$/;
+      if (!telepon.value.match(phonePattern)) {
+        errorTelepon.textContent = "Nomor HP harus angka 10-13 digit";
+        isValid = false;
+      } else {
+        errorTelepon.textContent = "";
+      }
+
+      if (isValid) {
+        successMsg.textContent = "✅ Registrasi berhasil!";
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
