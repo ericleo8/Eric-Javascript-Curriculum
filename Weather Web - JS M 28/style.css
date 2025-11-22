@@ -1,0 +1,53 @@
+body {
+    font-family: Arial;
+    background: linear-gradient(to bottom, #3a7bd5, #00d2ff);
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+}
+
+.container {
+    width: 350px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 6px;
+    background: #f2f2f2;
+    margin: 5px 0;
+    border-radius: 6px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* jarak antar tombol */
+    margin-top: 10px;
+}
+
+.btn-group button {
+    flex: 1;
+    /* supaya ukuran sama */
+    padding: 10px;
+    border: none;
+    background: #3a7bd5;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+    opacity: 0.8;
+}
