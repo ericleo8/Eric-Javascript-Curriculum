@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h1>Currency Converter</h1>
+
+      <div class="controls">
+        <div class="row">
+          <div class="col">
+            <label for="fromCurrency">From</label>
+            <select id="fromCurrency"></select>
+          </div>
+
+          <button id="swapBtn" title="Swap currencies">⇄</button>
+
+          <div class="col">
+            <label for="toCurrency">To</label>
+            <select id="toCurrency"></select>
+          </div>
+        </div>
+
+        <div class="row">
+          <input id="amount" type="number" min="0" placeholder="Amount" />
+          <button id="convertBtn">Convert</button>
+        </div>
+
+        <p id="rateInfo" class="muted"></p>
+        <p id="loading" class="muted hidden">Loading...</p>
+        <p id="error" class="error hidden"></p>
+      </div>
+
+      <div id="result" class="result hidden">
+        <h2>Result</h2>
+        <p id="converted"></p>
+      </div>
+
+      <div class="history">
+        <h3>History</h3>
+        <ul id="historyList"></ul>
+        <button id="clearHistory">Clear History</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
