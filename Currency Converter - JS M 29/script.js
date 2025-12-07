@@ -14,6 +14,17 @@ const convertedEl = document.getElementById("converted");
 const historyList = document.getElementById("historyList");
 const clearHistoryBtn = document.getElementById("clearHistory");
 
+// Apa yang ditekankan:
+
+// document.getElementById() mengembalikan referensi DOM.
+
+// Gunakan const karena referensi DOM tidak di-reassign.
+
+// Menyimpan referensi mempercepat akses dan membuat kode lebih readable.
+
+// Demo: di console ketik fromSelect dan tampilkan .value (saat belum diisi akan "").
+
+
 // ===========================
 // STATE
 // ===========================
@@ -36,6 +47,11 @@ function showError(msg) {
 function clearError() {
   errorEl.classList.add("hidden");
 }
+
+// Poin ajar:
+// currencyList menampung kode currency, history berisi array riwayat (parse dari string di localStorage).
+// JSON.parse(... || '[]') → jika tidak ada data, fallback ke array kosong.
+// showLoading() mengubah class .hidden untuk menampilkan elemen loading. Tekankan perbedaan style.display vs class toggle (classList.add/remove) — prefer class toggle untuk maintainability.
 
 // ===========================
 // INIT — LOAD CURRENCIES
@@ -63,6 +79,14 @@ async function init() {
   }
 }
 
+// Penjelasan lengkap:
+// async function init() → function asynchronous agar bisa await pada fetch.
+// fetch(url) mengembalikan Promise<Response>. await res.json() mengembalikan parsed JSON.
+// Kenapa open.er-api.com? API ini CORS-safe dan tidak memerlukan key, bagus untuk kelas.
+// Object.keys(data.rates) → daftar kode currency (USD, IDR, EUR, dll) — karena response data.rates adalah object { "IDR": 14500, "EUR": 0.90, ... }.
+// populateCurrencyDropdown() mengisi <select>; renderHistory() menampilkan riwayat (jika ada).
+// try...catch...finally → pattern wajib untuk network calls: handle failure and always cleanup (hide loading).
+
 // ===========================
 // POPULATE SELECT ELEMENTS
 // ===========================
@@ -85,6 +109,14 @@ function populateCurrencyDropdown(list) {
   fromSelect.value = "USD";
   toSelect.value = "IDR";
 }
+
+/*
+Penjelasan:
+Untuk setiap code buat dua <option> agar kedua dropdown memiliki opsi sama.
+createElement + appendChild part of DOM API.
+textContent aman karena tidak mengeksekusi HTML; gunakan ini jika ambil data dari internet.
+Set default from=USD, to=IDR — nilai ini bisa diubah sesuai kelas.
+*/
 
 // ===========================
 // CONVERT CURRENCY
@@ -137,6 +169,34 @@ async function convert() {
   }
 }
 
+/*
+Rincian penjelasan:
+
+clearError() menghapus pesan error sebelumnya.
+
+resultBox.classList.add("hidden") menyembunyikan hasil sebelum fetch, untuk menghindari menampilkan data lama selama request.
+
+parseFloat(amountInput.value) -> konversi string ke number. Jika input kosong atau bukan angka → NaN. if (!amount || amount <= 0) memvalidasi. Catatan: 0 dianggap invalid di sini.
+
+if (from === to) → ajarkan kenapa perlu handle ini (hasil = amount, tapi app UX sebaiknya beri tahu user).
+
+showLoading() tampilkan indikator.
+
+fetch('https://open.er-api.com/v6/latest/${from}') → kita ambil semua rates dengan base from. Response data.rates adalah object; ambil rate = data.rates[to].
+
+converted = amount * rate → kalkulasi sederhana.
+
+toLocaleString() untuk format angka berdasarkan locale pengguna (ribuan, desimal).
+
+convertedEl.innerHTML = ... → hati-hati XSS jika menampilkan input user mentah; di sini safe karena angka, tapi ajarkan caution.
+
+saveHistory(...) menyimpan record ke localStorage agar bisa replay.
+
+catch block menampilkan error umum jika fetch gagal — jelaskan network errors (timeout, no internet, CORS, API down).
+
+finally hide loading.
+*/
+
 // ===========================
 // SWAP BUTTON
 // ===========================
@@ -145,6 +205,11 @@ function swapCurrencies() {
   fromSelect.value = toSelect.value;
   toSelect.value = t;
 }
+
+/*
+Teknik swap klasik menggunakan temporary variable t. (Bisa juga tunjukkan destructuring swap [a,b] = [b,a] untuk ES6 advanced.)
+Setelah swap, baiknya bersihkan hasil atau auto-trigger konversi jika amount ada.
+*/
 
 // ===========================
 // HISTORY MANAGEMENT
@@ -206,6 +271,16 @@ clearHistoryBtn.addEventListener("click", () => {
   renderHistory();
 });
 
+/*
+Penjelasan:
+record.timestamp = Date.now() untuk menyimpan waktu dalam ms. Gunakan new Date(timestamp).toLocaleString() saat tampilkan.
+history.unshift(record) menaruh record terbaru di depan. history.pop() membatasi panjang array ke 10.
+localStorage.setItem(key, JSON.stringify(obj)) menyimpan array sebagai string.
+renderHistory() menghasilkan DOM <li> untuk tiap entry.
+Tombol replay mem-fill input dan memanggil convert() kembali. Ini demonstrasi konsep DRY (reuse of convert() function).
+clearHistoryBtn menghapus data dan update UI.
+*/
+
 // ===========================
 // EVENTS
 // ===========================
@@ -213,3 +288,12 @@ convertBtn.addEventListener("click", convert);
 swapBtn.addEventListener("click", swapCurrencies);
 
 init();
+
+/*
+Apa yang harus ditekankan:
+addEventListener membuat aplikasi reaktif.
+init() dipanggil sekali untuk bootstrap app.
+Jelaskan event bubbling jika anak tambahkan event pada parent — penting ketika membuat dynamic elements. (Di sini replay listeners di-attach per item.)
+*/
+
+

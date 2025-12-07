@@ -50,3 +50,18 @@
     <script src="script.js"></script>
   </body>
 </html>
+
+<!-- 
+Penjelasan elemen penting:
+<!DOCTYPE html>: deklarasi dokumen HTML5.
+<meta name="viewport"...>: responsif di mobile.
+<link rel="stylesheet"...>: sambungkan CSS.
+<div class="app">: root card aplikasi — memudahkan styling.
+<select id="fromCurrency"> & <select id="toCurrency">: tempat dropdown akan diisi dinamis oleh JS. Awalnya kosong (<select></select>).
+<button id="swapBtn">: tombol swap, menukar nilai from ↔ to.
+<input id="amount" type="number" min="0">: hanya angka, min="0" mencegah negatif (UI-level).
+<p id="loading" class="muted hidden">: teks loading, disembunyikan awalnya (.hidden) — JS toggles visibility.
+<div id="result"...>: area hasil konversi yang juga awalnya disembunyikan.
+<ul id="historyList">: tempat menampilkan riwayat. Item akan dibuat lewat JS.
+<script src="script.js"></script>: sambungkan logika; letakkan di akhir body supaya DOM sudah tersedia saat script dijalankan.
+-->

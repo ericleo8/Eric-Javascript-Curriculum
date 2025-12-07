@@ -137,3 +137,13 @@ button {
     background: #ef4444;
     color: white;
 }
+
+/* 
+Hal teknis yang harus ditekankan:
+:root CSS variables → jelaskan manfaat (ubah tema gampang).
+box-sizing: border-box → ukuran elemen termasuk padding/border — mencegah kalkulasi lebar yang membingungkan.
+display:flex pada .row → membuat layout horizontal; gap memberi jarak antar elemen.
+flex:1 di .col → kolom mengambil sisa ruang secara proporsional.
+.hidden digunakan sebagai “class toggle” untuk show/hide elemen lewat JS: element.classList.add('hidden') atau .remove('hidden').
+border-radius + box-shadow → membuat card look modern.
+*/

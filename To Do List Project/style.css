@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+}
+
+#addBtn {
+    padding: 10px 15px;
+    border: none;
+    background: #28a745;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+#addBtn:hover {
+    background: #218838;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fafafa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    /* teks di kiri, tombol di kanan */
+    align-items: center;
+    /* biar tombol sejajar tengah */
+}
+
+li span {
+    flex: 1;
+    /* biar teks ambil ruang kiri */
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+    /* jarak antar tombol */
+}
+
+button.complete {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button.delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+button.edit {
+    background: #ffc107;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
