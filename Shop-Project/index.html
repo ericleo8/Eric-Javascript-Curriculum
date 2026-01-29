@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Online Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🛍️ ShopLab</div>
+    <div class="controls">
+      <input id="searchInput" type="search" placeholder="Search products..." />
+
+      <select id="sortSelect">
+        <option value="default">Sort: Recommended</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="alpha-asc">Name: A → Z</option>
+        <option value="alpha-desc">Name: Z → A</option>
+      </select>
+
+      <select id="categorySelect">
+        <option value="all">All Categories</option>
+      </select>
+
+      <div class="price-filter">
+        <input id="minPrice" type="number" placeholder="Min" min="0" />
+        <input id="maxPrice" type="number" placeholder="Max" min="0" />
+        <button id="applyPrice">Apply</button>
+      </div>
+
+      <button id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+      <button id="openCartBtn" class="cart-button">Cart <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Featured Products</h1>
+      <p>Interactive mini shop — teach features like search, filter, sort, cart and persistent storage.</p>
+    </section>
+
+    <section class="products">
+      <div id="productList" class="product-grid"></div>
+    </section>
+  </main>
+
+  <!-- PRODUCT DETAILS MODAL -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close">✖</button>
+      <img id="modalImg" src="" alt="" />
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <p class="price" id="modalPrice"></p>
+      <button id="modalAdd" class="add-btn">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- CART SIDEBAR -->
+  <aside id="cartSidebar" class="cart" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn" aria-label="Close cart">✖</button>
+    </div>
+
+    <div class="cart-body">
+      <ul id="cartItems" class="cart-list"></ul>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">Total: <strong id="cartTotal">Rp0</strong></div>
+      <div class="cart-actions">
+        <button id="clearCart">Clear</button>
+        <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay" tabindex="-1"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

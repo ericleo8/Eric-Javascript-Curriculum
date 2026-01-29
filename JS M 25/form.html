@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Form Validation</title>
@@ -21,7 +22,7 @@
       background: white;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     }
 
     label {
@@ -65,8 +66,37 @@
       margin-top: 10px;
       font-weight: bold;
     }
+
+    input.error-input {
+      background-color: #ffe6e6;
+      border-color: red;
+      animation: shake 0.2s ease-in-out 2;
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-3px);
+      }
+
+      50% {
+        transform: translateX(3px);
+      }
+
+      75% {
+        transform: translateX(-3px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <h2>📝 Form Registrasi</h2>
@@ -84,73 +114,123 @@
     <input type="password" id="password" placeholder="Minimal 8 karakter">
     <div class="error" id="errorPassword"></div>
 
+    <label>Konfirmasi Password</label>
+    <input type="password" id="confirmPassword" placeholder="Ulangi password">
+    <div class="error" id="errorConfirm"></div>
+
     <label>Nomor HP</label>
     <input type="text" id="telepon" placeholder="Contoh: 08123456789">
     <div class="error" id="errorTelepon"></div>
+
+    <label>Alamat</label>
+    <input type="text" id="alamat" placeholder="Masukkan alamat">
+    <div class="error" id="errorAlamat"></div>
 
     <button type="submit">Daftar</button>
   </form>
 
   <div class="success" id="successMsg"></div>
 
-  <script>
-    const form = document.getElementById("registerForm");
-    const nama = document.getElementById("nama");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const telepon = document.getElementById("telepon");
+<script>
+  const form = document.getElementById("registerForm");
 
-    const errorNama = document.getElementById("errorNama");
-    const errorEmail = document.getElementById("errorEmail");
-    const errorPassword = document.getElementById("errorPassword");
-    const errorTelepon = document.getElementById("errorTelepon");
-    const successMsg = document.getElementById("successMsg");
+  const nama = document.getElementById("nama");
+  const alamat = document.getElementById("alamat");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirmPassword");
+  const telepon = document.getElementById("telepon");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault(); // mencegah reload
-      let isValid = true;
-      successMsg.textContent = "";
+  const errorNama = document.getElementById("errorNama");
+  const errorAlamat = document.getElementById("errorAlamat");
+  const errorEmail = document.getElementById("errorEmail");
+  const errorPassword = document.getElementById("errorPassword");
+  const errorConfirm = document.getElementById("errorConfirm");
+  const errorTelepon = document.getElementById("errorTelepon");
+  const successMsg = document.getElementById("successMsg");
 
-      // Validasi Nama
-      if (nama.value.trim() === "") {
-        errorNama.textContent = "Nama tidak boleh kosong";
-        isValid = false;
-      } else {
-        errorNama.textContent = "";
-      }
+  function setError(input, errorEl, message) {
+    errorEl.textContent = message;
+    input.classList.add("error-input");
+  }
 
-      // Validasi Email
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-      if (!email.value.match(emailPattern)) {
-        errorEmail.textContent = "Email tidak valid";
-        isValid = false;
-      } else {
-        errorEmail.textContent = "";
-      }
+  function clearError(input, errorEl) {
+    errorEl.textContent = "";
+    input.classList.remove("error-input");
+  }
 
-      // Validasi Password
-      if (password.value.length < 8) {
-        errorPassword.textContent = "Password minimal 8 karakter";
-        isValid = false;
-      } else {
-        errorPassword.textContent = "";
-      }
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    let isValid = true;
+    successMsg.textContent = "";
 
-      // Validasi Telepon
-      const phonePattern = /^[0-9]{10,13}$/;
-      if (!telepon.value.match(phonePattern)) {
-        errorTelepon.textContent = "Nomor HP harus angka 10-13 digit";
-        isValid = false;
-      } else {
-        errorTelepon.textContent = "";
-      }
+    // Nama (min 3 karakter)
+    if (nama.value.trim().length < 3) {
+      setError(nama, errorNama, "Nama minimal 3 karakter");
+      isValid = false;
+    } else {
+      clearError(nama, errorNama);
+    }
 
-      if (isValid) {
-        successMsg.textContent = "✅ Registrasi berhasil!";
-        form.reset();
-      }
-    });
-  </script>
+    // Alamat (wajib)
+    if (alamat.value.trim() === "") {
+      setError(alamat, errorAlamat, "Alamat wajib diisi");
+      isValid = false;
+    } else {
+      clearError(alamat, errorAlamat);
+    }
+
+    // Email (hanya gmail)
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!email.value.match(emailPattern)) {
+      setError(email, errorEmail, "Email harus menggunakan @gmail.com");
+      isValid = false;
+    } else {
+      clearError(email, errorEmail);
+    }
+
+    // Password
+    if (password.value.length < 8) {
+      setError(password, errorPassword, "Password minimal 8 karakter");
+      isValid = false;
+    } else {
+      clearError(password, errorPassword);
+    }
+
+    // Konfirmasi Password
+    if (password.value !== confirmPassword.value) {
+      setError(confirmPassword, errorConfirm, "Password tidak sama");
+      isValid = false;
+    } else {
+      clearError(confirmPassword, errorConfirm);
+    }
+
+    // Telepon
+    const phonePattern = /^[0-9]{10,13}$/;
+    if (!telepon.value.match(phonePattern)) {
+      setError(telepon, errorTelepon, "Nomor HP 10–13 digit");
+      isValid = false;
+    } else {
+      clearError(telepon, errorTelepon);
+    }
+
+    // Jika valid → simpan ke localStorage
+    if (isValid) {
+      const userData = {
+        nama: nama.value,
+        alamat: alamat.value,
+        email: email.value,
+        telepon: telepon.value
+      };
+
+      localStorage.setItem("userData", JSON.stringify(userData));
+      successMsg.textContent = "✅ Registrasi berhasil!";
+      form.reset();
+    }
+  });
+</script>
+
 
 </body>
+
 </html>

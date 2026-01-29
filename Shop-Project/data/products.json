@@ -1,0 +1,387 @@
+[
+    {
+        "id": 1,
+        "name": "Wireless Headset",
+        "price": 299000,
+        "image": "https://picsum.photos/seed/headset/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 2,
+        "name": "Mechanical Keyboard",
+        "price": 550000,
+        "image": "https://picsum.photos/seed/keyboard/400/300",
+        "category": "Computer"
+    },
+    {
+        "id": 3,
+        "name": "USB-C Charger 30W",
+        "price": 120000,
+        "image": "https://picsum.photos/seed/charger/400/300",
+        "category": "Power"
+    },
+    {
+        "id": 4,
+        "name": "Gaming Mouse",
+        "price": 199000,
+        "image": "https://picsum.photos/seed/gamingmouse/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 5,
+        "name": "4K Monitor",
+        "price": 3500000,
+        "image": "https://picsum.photos/seed/monitor4k/400/300",
+        "category": "Display"
+    },
+    {
+        "id": 6,
+        "name": "Bluetooth Speaker",
+        "price": 225000,
+        "image": "https://picsum.photos/seed/speaker/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 7,
+        "name": "Smartwatch",
+        "price": 850000,
+        "image": "https://picsum.photos/seed/smartwatch/400/300",
+        "category": "Wearable"
+    },
+    {
+        "id": 8,
+        "name": "External SSD 1TB",
+        "price": 1450000,
+        "image": "https://picsum.photos/seed/ssd/400/300",
+        "category": "Storage"
+    },
+    {
+        "id": 9,
+        "name": "Laptop Stand",
+        "price": 95000,
+        "image": "https://picsum.photos/seed/stand/400/300",
+        "category": "Office"
+    },
+    {
+        "id": 10,
+        "name": "Wireless Charger",
+        "price": 130000,
+        "image": "https://picsum.photos/seed/charger/400/300",
+        "category": "Power"
+    },
+    {
+        "id": 11,
+        "name": "Noise Cancelling Earbuds",
+        "price": 420000,
+        "image": "https://picsum.photos/seed/earbuds/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 12,
+        "name": "Portable Projector",
+        "price": 2750000,
+        "image": "https://picsum.photos/seed/projector/400/300",
+        "category": "Display"
+    },
+    {
+        "id": 13,
+        "name": "Action Camera",
+        "price": 1600000,
+        "image": "https://picsum.photos/seed/actioncam/400/300",
+        "category": "Camera"
+    },
+    {
+        "id": 14,
+        "name": "Fitness Band",
+        "price": 210000,
+        "image": "https://picsum.photos/seed/fitness/400/300",
+        "category": "Wearable"
+    },
+    {
+        "id": 15,
+        "name": "Smart Light Bulb",
+        "price": 75000,
+        "image": "https://picsum.photos/seed/light/400/300",
+        "category": "Lighting"
+    },
+    {
+        "id": 16,
+        "name": "Desk Lamp",
+        "price": 125000,
+        "image": "https://picsum.photos/seed/desklamp/400/300",
+        "category": "Lighting"
+    },
+    {
+        "id": 17,
+        "name": "Wireless Presenter",
+        "price": 67000,
+        "image": "https://picsum.photos/seed/presenter/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 18,
+        "name": "Bluetooth Receiver",
+        "price": 88000,
+        "image": "https://picsum.photos/seed/receiver/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 19,
+        "name": "HDMI Cable 2m",
+        "price": 45000,
+        "image": "https://picsum.photos/seed/hdmi/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 20,
+        "name": "Microphone USB",
+        "price": 320000,
+        "image": "https://picsum.photos/seed/mic/400/300",
+        "category": "Peripherals"
+    },
+    {
+        "id": 21,
+        "name": "Webcam 1080p",
+        "price": 240000,
+        "image": "https://picsum.photos/seed/webcam/400/300",
+        "category": "Peripherals"
+    },
+    {
+        "id": 22,
+        "name": "Laptop Backpack",
+        "price": 180000,
+        "image": "https://picsum.photos/seed/backpack/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 23,
+        "name": "Portable Power Bank 20k",
+        "price": 220000,
+        "image": "https://picsum.photos/seed/powerbank/400/300",
+        "category": "Power"
+    },
+    {
+        "id": 24,
+        "name": "Smart Thermostat",
+        "price": 980000,
+        "image": "https://picsum.photos/seed/thermostat/400/300",
+        "category": "Smart Home"
+    },
+    {
+        "id": 25,
+        "name": "VR Headset",
+        "price": 3200000,
+        "image": "https://picsum.photos/seed/vr/400/300",
+        "category": "Gaming"
+    },
+    {
+        "id": 26,
+        "name": "Wireless Gamepad",
+        "price": 280000,
+        "image": "https://picsum.photos/seed/gamepad/400/300",
+        "category": "Gaming"
+    },
+    {
+        "id": 27,
+        "name": "Smart Plug",
+        "price": 65000,
+        "image": "https://picsum.photos/seed/plug/400/300",
+        "category": "Smart Home"
+    },
+    {
+        "id": 28,
+        "name": "Bluetooth Transmitter",
+        "price": 99000,
+        "image": "https://picsum.photos/seed/transmitter/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 29,
+        "name": "Smart Doorbell",
+        "price": 720000,
+        "image": "https://picsum.photos/seed/doorbell/400/300",
+        "category": "Smart Home"
+    },
+    {
+        "id": 30,
+        "name": "Router AX3000",
+        "price": 1450000,
+        "image": "https://picsum.photos/seed/router/400/300",
+        "category": "Networking"
+    },
+    {
+        "id": 31,
+        "name": "Network Switch 8-port",
+        "price": 510000,
+        "image": "https://picsum.photos/seed/switch/400/300",
+        "category": "Networking"
+    },
+    {
+        "id": 32,
+        "name": "Portable Monitor 15.6",
+        "price": 1250000,
+        "image": "https://picsum.photos/seed/monitor2/400/300",
+        "category": "Display"
+    },
+    {
+        "id": 33,
+        "name": "Graphic Tablet",
+        "price": 760000,
+        "image": "https://picsum.photos/seed/tablet/400/300",
+        "category": "Computer"
+    },
+    {
+        "id": 34,
+        "name": "Noise Isolation Headphones",
+        "price": 410000,
+        "image": "https://picsum.photos/seed/headphones/400/300",
+        "category": "Audio"
+    },
+    {
+        "id": 35,
+        "name": "LED Strip Light",
+        "price": 55000,
+        "image": "https://picsum.photos/seed/led/400/300",
+        "category": "Lighting"
+    },
+    {
+        "id": 36,
+        "name": "Camera Tripod",
+        "price": 90000,
+        "image": "https://picsum.photos/seed/tripod/400/300",
+        "category": "Camera"
+    },
+    {
+        "id": 37,
+        "name": "SD Card 128GB",
+        "price": 170000,
+        "image": "https://picsum.photos/seed/sdcard/400/300",
+        "category": "Storage"
+    },
+    {
+        "id": 38,
+        "name": "Smart Scale",
+        "price": 220000,
+        "image": "https://picsum.photos/seed/scale/400/300",
+        "category": "Home"
+    },
+    {
+        "id": 39,
+        "name": "Bluetooth Alarm Clock",
+        "price": 115000,
+        "image": "https://picsum.photos/seed/alarm/400/300",
+        "category": "Home"
+    },
+    {
+        "id": 40,
+        "name": "Streaming Microphone",
+        "price": 480000,
+        "image": "https://picsum.photos/seed/streammic/400/300",
+        "category": "Peripherals"
+    },
+    {
+        "id": 41,
+        "name": "Smart Camera (Indoor)",
+        "price": 390000,
+        "image": "https://picsum.photos/seed/indoorcam/400/300",
+        "category": "Camera"
+    },
+    {
+        "id": 42,
+        "name": "Wireless Ear Hook",
+        "price": 68000,
+        "image": "https://picsum.photos/seed/earhook/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 43,
+        "name": "USB Hub 4-port",
+        "price": 45000,
+        "image": "https://picsum.photos/seed/usbhub/400/300",
+        "category": "Peripherals"
+    },
+    {
+        "id": 44,
+        "name": "Cable Organizer",
+        "price": 25000,
+        "image": "https://picsum.photos/seed/organizer/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 45,
+        "name": "Ergonomic Mouse Pad",
+        "price": 35000,
+        "image": "https://picsum.photos/seed/mousepad/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 46,
+        "name": "Cooling Pad for Laptop",
+        "price": 140000,
+        "image": "https://picsum.photos/seed/cooler/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 47,
+        "name": "Bluetooth Keyboard",
+        "price": 210000,
+        "image": "https://picsum.photos/seed/btkeyboard/400/300",
+        "category": "Computer"
+    },
+    {
+        "id": 48,
+        "name": "HD Antenna",
+        "price": 60000,
+        "image": "https://picsum.photos/seed/antenna/400/300",
+        "category": "Networking"
+    },
+    {
+        "id": 49,
+        "name": "Smart Water Bottle",
+        "price": 175000,
+        "image": "https://picsum.photos/seed/bottle/400/300",
+        "category": "Home"
+    },
+    {
+        "id": 50,
+        "name": "USB Humidifier",
+        "price": 95000,
+        "image": "https://picsum.photos/seed/humidifier/400/300",
+        "category": "Home"
+    },
+    {
+        "id": 51,
+        "name": "Magnetic Phone Mount",
+        "price": 49000,
+        "image": "https://picsum.photos/seed/mount/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 52,
+        "name": "Cable 3-in-1",
+        "price": 33000,
+        "image": "https://picsum.photos/seed/cable/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 53,
+        "name": "LED Ring Light",
+        "price": 125000,
+        "image": "https://picsum.photos/seed/ringlight/400/300",
+        "category": "Lighting"
+    },
+    {
+        "id": 54,
+        "name": "Smart Backpack Anti-theft",
+        "price": 420000,
+        "image": "https://picsum.photos/seed/antitheft/400/300",
+        "category": "Accessories"
+    },
+    {
+        "id": 55,
+        "name": "Wireless Charging Pad",
+        "price": 115000,
+        "image": "https://picsum.photos/seed/qi/400/300",
+        "category": "Power"
+    }
+]

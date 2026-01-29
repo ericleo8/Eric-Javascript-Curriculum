@@ -1,0 +1,182 @@
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root{
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --accent: #4e7cff;
+  --success: #1dbf73;
+  --danger: #ef4444;
+  --muted: #6b7280;
+}
+
+body {
+  background: var(--bg);
+  color: #222;
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: var(--card);
+  padding: 12px 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+.cart-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+}
+.cart-button:hover { transform: translateY(-2px); transition: .12s; }
+
+/* MAIN / GRID */
+main { padding: 20px; max-width: 1100px; margin: 0 auto; }
+.section-title { margin: 8px 0 14px 0; font-size: 18px; color: #111; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* CARD */
+.product-card {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform .16s, box-shadow .16s;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-card h3 { font-size: 16px; margin-top: 4px; }
+.product-card p { color: var(--muted); margin-top: 4px; }
+
+.product-card button {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px;
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.product-card button:hover { background: #17a461 }
+
+/* CART SIDEBAR */
+.cart {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 340px;
+  height: 100vh;
+  background: var(--card);
+  transition: right .28s ease;
+  box-shadow: -6px 0 18px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.cart.open {
+  right: 0;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+  align-items: center;
+  border-bottom: 1px solid #f1f3f5;
+}
+.cart-list { list-style: none; padding: 12px; overflow-y: auto; flex: 1; }
+.cart-item {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 10px 6px;
+  border-bottom: 1px dashed #f1f3f5;
+}
+.cart-item .left { display:flex; gap:8px; align-items:center; max-width: 65%; }
+.cart-item .left img { width:48px; height:48px; border-radius:6px; object-fit:cover; }
+.cart-item .meta { font-size:13px; color:#222; }
+.cart-item .meta small { color:var(--muted); display:block; font-size:12px; margin-top:4px; }
+
+.qty-controls { display:flex; gap:6px; align-items:center; }
+.qty-btn {
+  padding: 4px 8px;
+  border-radius:6px;
+  border: none;
+  background: #f1f3f5;
+  cursor:pointer;
+}
+.remove-btn { color: var(--danger); cursor:pointer; border: none; background: transparent; font-size:16px; }
+
+.cart-footer { padding: 14px; border-top: 1px solid #f1f3f5; display:flex; flex-direction:column; gap:10px; }
+.checkout-btn { padding:10px; border-radius:8px; border:none; background:var(--accent); color:white; font-weight:600; cursor:pointer; }
+
+/* OVERLAY */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.28);
+  z-index: 15;
+}
+.overlay.show { display: block; }
+
+/* small helper */
+.empty { opacity: 0.8; color: var(--muted); text-align: center; padding: 8px; }
+
+/* badge pulse animation */
+#cartCount { background: rgba(255,255,255,0.2); padding: 3px 7px; border-radius: 8px; margin-left: 6px; font-weight:700; }
+.pulse { animation: pulse .32s ease; }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+  .cart { width: 100%; right: -100%; }
+  .cart.open { right: 0; }
+  .product-card img { height: 180px; }
+}

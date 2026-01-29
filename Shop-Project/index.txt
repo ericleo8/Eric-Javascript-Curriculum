@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Online Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>🛒 Mini Online Shop</h1>
+    <button id="openCartBtn" class="cart-button">
+      Cart <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <h2 class="section-title">Products</h2>
+    <div id="productList" class="product-grid"></div>
+  </main>
+
+  <!-- CART SIDEBAR -->
+  <aside id="cartSidebar" class="cart" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn" aria-label="Close cart">✖</button>
+    </div>
+
+    <ul id="cartItems" class="cart-list"></ul>
+
+    <div class="cart-footer">
+      <p>Total: <strong id="cartTotal">Rp0</strong></p>
+      <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay" tabindex="-1"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

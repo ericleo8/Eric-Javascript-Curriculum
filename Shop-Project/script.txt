@@ -1,0 +1,239 @@
+// =======================
+// Mini Online Shop - script.js
+// =======================
+
+// GLOBAL STATE
+let products = [];
+let cart = [];
+
+// DOM Elements
+const productListEl = document.getElementById("productList");
+const cartItemsEl = document.getElementById("cartItems");
+const cartTotalEl = document.getElementById("cartTotal");
+const cartCountEl = document.getElementById("cartCount");
+const openCartBtn = document.getElementById("openCartBtn");
+const closeCartBtn = document.getElementById("closeCartBtn");
+const cartSidebar = document.getElementById("cartSidebar");
+const overlay = document.getElementById("overlay");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+// ====== Load products (from data/products.json) ======
+async function loadProducts() {
+  try {
+    const res = await fetch("data/products.json");
+    if (!res.ok) throw new Error("Products not found");
+    products = await res.json();
+  } catch (err) {
+    console.error("Failed to load products:", err);
+    products = [];
+  }
+}
+
+// ====== Render product cards ======
+function renderProducts() {
+  productListEl.innerHTML = "";
+
+  if (!products.length) {
+    productListEl.innerHTML = `<p class="empty">No products available.</p>`;
+    return;
+  }
+
+  products.forEach((p) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <img src="${p.image}" alt="${escapeHtml(p.name)}" />
+      <h3>${escapeHtml(p.name)}</h3>
+      <p>Rp${Number(p.price).toLocaleString()}</p>
+      <button data-id="${p.id}" class="add-btn">Add to Cart</button>
+    `;
+
+    productListEl.appendChild(card);
+  });
+
+  // attach event via delegation to productListEl
+  productListEl.querySelectorAll(".add-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = Number(btn.getAttribute("data-id"));
+      addToCart(id);
+    });
+  });
+}
+
+// simple escape to avoid accidental HTML injection from data
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+// ====== Cart operations ======
+function addToCart(id) {
+  const item = cart.find((c) => c.id === id);
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ id, qty: 1 });
+  }
+  saveCart();
+  renderCart();
+  updateCartCount();
+  animateCartBadge();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find((c) => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeItem(id);
+  saveCart();
+  renderCart();
+  updateCartCount();
+}
+
+function removeItem(id) {
+  cart = cart.filter((c) => c.id !== id);
+  saveCart();
+  renderCart();
+  updateCartCount();
+}
+
+// ====== Render cart UI ======
+function renderCart() {
+  cartItemsEl.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartItemsEl.innerHTML = `<p class="empty">Your cart is empty.</p>`;
+    updateTotal();
+    return;
+  }
+
+  cart.forEach((c) => {
+    const product = products.find((p) => p.id === c.id);
+    if (!product) return;
+
+    const li = document.createElement("li");
+    li.className = "cart-item";
+
+    li.innerHTML = `
+      <div class="left">
+        <img src="${product.image}" alt="${escapeHtml(product.name)}" />
+        <div class="meta">
+          <strong>${escapeHtml(product.name)}</strong>
+          <small>Rp${product.price.toLocaleString()} • Sub: Rp${(product.price * c.qty).toLocaleString()}</small>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="qty-controls">
+          <button class="qty-btn" data-id="${c.id}" data-delta="-1">-</button>
+          <span>${c.qty}</span>
+          <button class="qty-btn" data-id="${c.id}" data-delta="1">+</button>
+        </div>
+        <div style="margin-top:6px;">
+          <button class="remove-btn" data-id="${c.id}">Remove</button>
+        </div>
+      </div>
+    `;
+
+    cartItemsEl.appendChild(li);
+  });
+
+  // attach handlers (delegation style)
+  cartItemsEl.querySelectorAll(".qty-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = Number(btn.getAttribute("data-id"));
+      const delta = Number(btn.getAttribute("data-delta"));
+      changeQty(id, delta);
+    });
+  });
+
+  cartItemsEl.querySelectorAll(".remove-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = Number(btn.getAttribute("data-id"));
+      removeItem(id);
+    });
+  });
+
+  updateTotal();
+}
+
+// ====== Total & Count ======
+function updateTotal() {
+  const total = cart.reduce((sum, item) => {
+    const product = products.find((p) => p.id === item.id);
+    return sum + (product ? product.price * item.qty : 0);
+  }, 0);
+
+  cartTotalEl.textContent = "Rp" + total.toLocaleString();
+}
+
+function updateCartCount() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  cartCountEl.textContent = count;
+}
+
+function animateCartBadge() {
+  cartCountEl.classList.add("pulse");
+  setTimeout(() => cartCountEl.classList.remove("pulse"), 300);
+}
+
+// ====== Local Storage ======
+function saveCart() {
+  localStorage.setItem("cartData", JSON.stringify(cart));
+}
+function loadCart() {
+  const saved = localStorage.getItem("cartData");
+  cart = saved ? JSON.parse(saved) : [];
+}
+
+// ====== CART SIDEBAR TOGGLE ======
+function openCart() {
+  cartSidebar.classList.add("open");
+  overlay.classList.add("show");
+  cartSidebar.setAttribute("aria-hidden", "false");
+}
+function closeCart() {
+  cartSidebar.classList.remove("open");
+  overlay.classList.remove("show");
+  cartSidebar.setAttribute("aria-hidden", "true");
+}
+
+function setupCartToggle() {
+  openCartBtn.addEventListener("click", openCart);
+  closeCartBtn.addEventListener("click", closeCart);
+  overlay.addEventListener("click", closeCart);
+  // Escape key closes cart
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeCart();
+  });
+}
+
+// ====== CHECKOUT ======
+checkoutBtn.addEventListener("click", () => {
+  if (cart.length === 0) return alert("Your cart is empty!");
+  // For demo: just clear cart
+  alert("Checkout successful. Thank you!");
+  cart = [];
+  saveCart();
+  renderCart();
+  updateCartCount();
+  closeCart();
+});
+
+// ====== INIT APP (ensure products loaded first) ======
+async function init() {
+  await loadProducts();       // load product data
+  loadCart();                 // restore cart from localStorage
+  renderProducts();           // render product cards (attach add buttons)
+  renderCart();               // render cart using products array
+  updateCartCount();          // update badge
+  setupCartToggle();          // open/close logic
+}
+
+// Start
+init();
